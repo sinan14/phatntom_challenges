@@ -1,0 +1,65 @@
+CREATE DATABASE testDB;
+CREATE TABLE Persons (
+    CustomerID int AUTO_INCREMENT,
+    Name varchar(255),
+    Address varchar(255),
+    City varchar(255)
+    PostalCode int
+    Country varchar(255)
+);
+
+INSERT INTO Customers (Name, Address, City, PostalCode, Country)
+VALUES
+('Cardinal',  'Skagen 21', 'Stavanger', '4006', 'Norway');
+('sinan',  'cqa 21', 'Evm', '4006', 'India');
+
+
+CREATE TABLE Orders(
+   OrderId INT AUTO_INCREMENT,
+   CustomerID int,
+   ProductID int,
+   OrderDate DATE NOT NULL,
+   ShippedDate DATE NOT NULL,
+   DeliveryDate  DATE NOT NULL,
+   PRIMARY KEY(OrderNumber )
+);
+
+INSERT INTO 
+Orders(OrderID ,ProductID, OrderDate , ShippedDate  , DeliveryDate )
+VALUES 
+(1001, '2019-12-21', '11001', '2004-12-22', '2019-12-26'),
+(1002, '2020-01-21', 11001', '2020-01-21', '2020-01-22'),
+(1003, '2020-05-01', 11001', '2020-05-03', '2020-05-10'),
+(1004, '2020-07-31', 11001', 2020-08-01', '2020-08-01');
+
+
+CREATE TABLE ProductDetails(
+ProductId INT NOT NULL,
+ProductName VARCHAR(20) NOT NULL,
+Manufactured_On DATE NOT NULL,
+PRIMARY KEY(ProductId)
+);
+
+INSERT INTO  
+ProductDetails(ProductId, ProductName, Manufactured_On)
+VALUES
+(11001, 'ASUS X554L', CURRENT_DATE()) ;
+
+
+
+//left join
+
+SELECT Customers.Name, Orders.OrderID
+FROM Customers
+LEFT JOIN Orders
+ON Customers.CustomerID=Orders.CustomerID
+ORDER BY Customers.Name;
+
+
+
+//right join
+
+SELECT Orders.OrderID, ProductDetails.ProductID
+FROM Orders
+RIGHT JOIN ProductDetails ON Orders.ProductID = ProductDetails.ProductID
+ORDER BY Orders.OrderID;
