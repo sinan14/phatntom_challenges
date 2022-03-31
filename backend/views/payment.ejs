@@ -33,46 +33,46 @@
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
     <!-- create order -->
     <script>
-      document.getElementById('order-button1').onclick = function(e) {
-        const url = '/api/payment/order';
+      document.getElementById("order-button1").onclick = function(e) {
+        const url = "/api/v1/payment/order";
         const params = {
-          amount: document.getElementById('order-amt').value,
-          currency: 'INR',
-          receipt: 'wthcoding001',
-          payment_capture: '1'
+          amount: document.getElementById("order-amt").value,
+          currency: "INR",
+          receipt: "wthcoding001",
+          payment_capture: "1",
         };
         const xmlHttp = new XMLHttpRequest();
         xmlHttp.onreadystatechange = function(res) {
           if (xmlHttp.readyState === 4) {
             res = JSON.parse(xmlHttp.responseText);
-            document.getElementById('rzp-text').value = res.sub.id;
+            document.getElementById("rzp-text").value = res.sub.id;
           }
         };
-        xmlHttp.open('POST', url, true);
-        xmlHttp.setRequestHeader('Content-type', 'application/json');
+        xmlHttp.open("POST", url, true);
+        xmlHttp.setRequestHeader("Content-type", "application/json");
         xmlHttp.send(JSON.stringify(params));
       };
     </script>
     <!-- checkout  -->
     <script>
-      document.getElementById('rzp-button1').onclick = function(e) {
+      document.getElementById("rzp-button1").onclick = function(e) {
         const options = {
-          key: '<%= key %>',
-          currency: 'INR',
-          name: 'TEST CORP',
-          description: 'TEST CORP TRANSACTION',
-          order_id: document.getElementById('rzp-text').value,
+          key: "<%= key %>",
+          currency: "INR",
+          name: "TEST CORP",
+          description: "TEST CORP TRANSACTION",
+          order_id: document.getElementById("rzp-text").value,
           handler: function(response) {
-            document.getElementById('order-pay-id').value =
+            document.getElementById("order-pay-id").value =
               response.razorpay_payment_id;
-            document.getElementById('order-id').value =
+            document.getElementById("order-id").value =
               response.razorpay_order_id;
-            document.getElementById('order-sig').value =
+            document.getElementById("order-sig").value =
               response.razorpay_signature;
           },
           theme: {
-            color: '#0EB9F2'
-          }
+            color: "#0EB9F2",
+          },
         };
         const rzp1 = new Razorpay(options);
         rzp1.open();
@@ -81,12 +81,12 @@
     </script>
     <!-- verify -->
     <script>
-      document.getElementById('verify-button1').onclick = function(e) {
-        const url = '/api/payment/verify';
+      document.getElementById("verify-button1").onclick = function(e) {
+        const url = "/api/v1/payment/verify";
         const params = {
-          razorpay_order_id: document.getElementById('order-id').value,
-          razorpay_payment_id: document.getElementById('order-pay-id').value,
-          razorpay_signature: document.getElementById('order-sig').value
+          razorpay_order_id: document.getElementById("order-id").value,
+          razorpay_payment_id: document.getElementById("order-pay-id").value,
+          razorpay_signature: document.getElementById("order-sig").value,
         };
         const xmlHttp = new XMLHttpRequest();
         xmlHttp.onreadystatechange = function(res) {
@@ -94,8 +94,8 @@
             alert(xmlHttp.responseText);
           }
         };
-        xmlHttp.open('POST', url, true); // false for synchronous request
-        xmlHttp.setRequestHeader('Content-type', 'application/json');
+        xmlHttp.open("POST", url, true); // false for synchronous request
+        xmlHttp.setRequestHeader("Content-type", "application/json");
         xmlHttp.send(JSON.stringify(params));
       };
     </script>
