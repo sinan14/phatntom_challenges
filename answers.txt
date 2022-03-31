@@ -1,0 +1,12 @@
+challenges
+1
+2
+3
+6
+
+are done in a backend folder
+i have shared collection of api's of first 3 challenges.
+
+last challenges is done using ejs template
+
+localhost:3000/payments
